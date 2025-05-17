@@ -225,7 +225,7 @@ body.dark-mode .spinner {
   100% { transform: rotate(360deg); }
 }
 
-/* أنماط عجلة الخبرات الاحترافية */
+/* أنماط العجلة المعدلة */
 .wheel-container {
   display: flex;
   flex-direction: column;
@@ -244,6 +244,7 @@ body.dark-mode .spinner {
   position: relative;
   width: 300px;
   height: 300px;
+  perspective: 1000px;
 }
 
 .wheel {
@@ -258,7 +259,7 @@ body.dark-mode .spinner {
 }
 
 .wheel-btn {
-  background: var(--primary-color);
+  background: #2c3e50;
   color: white;
   border: none;
   width: 50px;
@@ -273,7 +274,7 @@ body.dark-mode .spinner {
 }
 
 .wheel-btn:hover {
-  background: var(--secondary-color);
+  background: #3498db;
   transform: scale(1.1);
 }
 
@@ -281,7 +282,9 @@ body.dark-mode .spinner {
   position: absolute;
   width: 50%;
   height: 50%;
-  transform-origin: 100% 100%;
+  top: 0;
+  left: 50%;
+  transform-origin: 0% 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -291,7 +294,7 @@ body.dark-mode .spinner {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
   cursor: pointer;
   transition: all 0.3s;
-  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
 }
 
 .skill-segment:hover {
@@ -303,6 +306,7 @@ body.dark-mode .spinner {
   width: 100%;
   max-width: 500px;
   text-align: center;
+  margin-top: 20px;
 }
 
 .skill-info {
@@ -320,23 +324,24 @@ body.dark-mode .skill-info {
 }
 
 .expand-btn {
-  background: var(--secondary-color);
+  background: #3498db;
   color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s;
+  margin-top: 10px;
 }
 
 .expand-btn:hover {
-  background: var(--primary-color);
+  background: #2c3e50;
 }
 
-/* ألوان القطاعات */
-.segment-1 { background: linear-gradient(135deg, #3498db, #2980b9); }
-.segment-2 { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-.segment-3 { background: linear-gradient(135deg, #2ecc71, #27ae60); }
-.segment-4 { background: linear-gradient(135deg, #f39c12, #e67e22); }
-.segment-5 { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-.segment-6 { background: linear-gradient(135deg, #1abc9c, #16a085); }
+/* ألوان القطاعات المعدلة */
+.segment-1 { background: #3498db; left: 50%; transform: rotate(0deg) skewY(30deg); }
+.segment-2 { background: #e74c3c; left: 50%; transform: rotate(60deg) skewY(30deg); }
+.segment-3 { background: #2ecc71; left: 50%; transform: rotate(120deg) skewY(30deg); }
+.segment-4 { background: #f39c12; left: 50%; transform: rotate(180deg) skewY(30deg); }
+.segment-5 { background: #9b59b6; left: 50%; transform: rotate(240deg) skewY(30deg); }
+.segment-6 { background: #1abc9c; left: 50%; transform: rotate(300deg) skewY(30deg); }
