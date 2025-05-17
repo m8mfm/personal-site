@@ -12,6 +12,8 @@
   --dark-accent: #55acee;
   --light-text: #f2f2f2;
   --dark-bg: #121212;
+  --header-bg: #2c3e50;
+  --header-text: white;
 }
 
 body {
@@ -21,31 +23,39 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* نعدل قواعد Dark Mode */
-body.dark-mode .container {
-  background: #121212;
+/* Dark Mode الصحيح */
+body.dark-mode {
+  background: var(--dark-bg);
   color: #ddd;
-  padding: 20px;
-  border-radius: 10px;
+}
+
+body.dark-mode .container {
+  background: transparent;
 }
 
 body.dark-mode .section {
   background: #1e1e1e;
-  padding: 15px;
+  padding: 20px;
   border-radius: 8px;
   margin-bottom: 20px;
 }
 
-/* نزيل التغييرات من Header */
+/* Header ثابت لا يتغير */
 header {
-  background: #2c3e50 !important; /* نستخدم !important للتأكد من عدم التغيير */
-  color: white !important;
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
 }
 
+/* إبقاء الهيدر كما هو في Dark Mode */
 body.dark-mode header {
-  background: #2c3e50 !important;
-  color: white !important;
+  background: var(--header-bg);
+  color: var(--header-text);
 }
+
+/* باقي الأنماط... (تبقى كما هي) */
 
 body.dark-mode .social-icons a {
   color: white !important;
