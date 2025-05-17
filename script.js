@@ -1,22 +1,20 @@
-// Dark mode toggle with localStorage
-document.addEventListener("DOMContentLoaded", function () {
-  // Dark Mode
+// Dark Mode الصحيح
+document.addEventListener("DOMContentLoaded", function() {
   const toggleBtn = document.getElementById("toggle-mode");
   const savedMode = localStorage.getItem("mode");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-
-  if (savedMode === "dark" || (!savedMode && prefersDark)) {
+  
+  if (savedMode === "dark") {
     document.body.classList.add("dark-mode");
     toggleBtn.textContent = "☀️";
   }
-
+  
   toggleBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
     const isDark = document.body.classList.contains("dark-mode");
     toggleBtn.textContent = isDark ? "☀️" : "🌙";
     localStorage.setItem("mode", isDark ? "dark" : "light");
   });
-
+});
   // شريط التقدم
   const progressContainer = document.createElement('div');
   progressContainer.className = 'progress-container';
