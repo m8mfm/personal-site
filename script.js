@@ -62,37 +62,50 @@ document.addEventListener("DOMContentLoaded", function() {
   }, 500);
 });
 
-// بيانات الخبرات
+
+// بيانات الخبرات المحسنة
 const skillsData = [
   {
-    name: "HTML",
-    description: "3+ years experience building semantic and accessible web pages",
-    level: "Advanced"
+    name: "HTML5",
+    description: "Semantic markup, accessibility, modern APIs",
+    level: "Expert",
+    years: "3+",
+    details: "Extensive experience building responsive and accessible web pages using latest HTML5 standards."
   },
   {
-    name: "CSS",
-    description: "Modern CSS including Flexbox, Grid, and animations",
-    level: "Advanced"
+    name: "CSS3",
+    description: "Flexbox, Grid, Animations",
+    level: "Expert",
+    years: "3+",
+    details: "Advanced CSS skills including custom properties, transitions, and complex layouts."
   },
   {
     name: "JavaScript",
-    description: "ES6+ features, DOM manipulation, and async programming",
-    level: "Intermediate"
+    description: "ES6+, DOM, Async",
+    level: "Advanced",
+    years: "2+",
+    details: "Modern JavaScript development with focus on clean code and performance."
   },
   {
     name: "React",
-    description: "Building reusable components with hooks and context API",
-    level: "Intermediate"
+    description: "Hooks, Context, Redux",
+    level: "Intermediate",
+    years: "1+",
+    details: "Building reusable components and state management in React applications."
   },
   {
     name: "Python",
-    description: "Scripting and basic backend development",
-    level: "Basic"
+    description: "Scripting, Automation",
+    level: "Basic",
+    years: "<1",
+    details: "Basic scripting for automation and backend development."
   },
   {
     name: "English",
-    description: "Professional working proficiency",
-    level: "Advanced"
+    description: "Professional",
+    level: "Fluent",
+    years: "",
+    details: "Professional working proficiency in technical communication."
   }
 ];
 
@@ -105,12 +118,17 @@ function createWheel() {
     const segment = document.createElement('div');
     segment.className = `skill-segment segment-${index + 1}`;
     segment.style.transform = `rotate(${segmentAngle * index}deg) skewY(${90 - segmentAngle}deg)`;
-    segment.style.width = '50%';
-    segment.style.height = '50%';
-    segment.innerHTML = `<span style="transform: skewY(${segmentAngle - 90}deg) rotate(${segmentAngle/2}deg); display: block;">${skill.name}</span>`;
+    segment.innerHTML = `
+      <span style="transform: skewY(${segmentAngle - 90}deg) rotate(${segmentAngle/2}deg); 
+                  display: block;
+                  width: 100px;
+                  text-align: center;
+                  margin-left: -50px;">
+        ${skill.name}
+      </span>`;
     
     segment.addEventListener('click', () => {
-      showSkillInfo(skill);
+      showSkillInfo(skill, false);
     });
     
     wheel.appendChild(segment);
@@ -118,46 +136,42 @@ function createWheel() {
 }
 
 // عرض معلومات الخبرة
-function showSkillInfo(skill) {
+function showSkillInfo(skill, isExpanded) {
   const infoBox = document.getElementById('skill-info');
+  const expandBtn = document.getElementById('expand-btn');
+  
   infoBox.innerHTML = `
     <h3>${skill.name}</h3>
-    <p><strong>Level:</strong> ${skill.level}</p>
+    <p><strong>Level:</strong> ${skill.level} ${skill.years ? `(${skill.years} years)` : ''}</p>
     <p>${skill.description}</p>
+    ${isExpanded ? `<div class="skill-details">${skill.details}</div>` : ''}
   `;
-  infoBox.classList.add('active');
   
-  // إخفاء المعلومات بعد 5 ثواني
-  setTimeout(() => {
-    infoBox.classList.remove('active');
-  }, 5000);
+  expandBtn.style.display = isExpanded ? 'none' : 'block';
+  expandBtn.onclick = () => showSkillInfo(skill, true);
 }
 
-// تدوير العجلة بالماوس
-let rotation = 0;
+// تدوير العجلة
+let currentAngle = 0;
 const wheel = document.getElementById('skills-wheel');
+const spinLeft = document.getElementById('spin-left');
+const spinRight = document.getElementById('spin-right');
 
-wheel.addEventListener('mousedown', (e) => {
-  e.preventDefault();
-  let startX = e.clientX;
-  let startRotation = rotation;
+function spinWheel(angle) {
+  currentAngle += angle;
+  wheel.style.transform = `rotate(${currentAngle}deg)`;
   
-  function moveHandler(e) {
-    const deltaX = e.clientX - startX;
-    rotation = startRotation + deltaX;
-    wheel.style.transform = `rotate(${rotation}deg)`;
-  }
-  
-  function upHandler() {
-    document.removeEventListener('mousemove', moveHandler);
-    document.removeEventListener('mouseup', upHandler);
-  }
-  
-  document.addEventListener('mousemove', moveHandler);
-  document.addEventListener('mouseup', upHandler);
-});
+  // إظهار المهارة الحالية بعد الدوران
+  setTimeout(() => {
+    const segmentIndex = Math.floor(((360 - (currentAngle % 360)) / (360 / skillsData.length))) % skillsData.length;
+    showSkillInfo(skillsData[segmentIndex], false);
+  }, 1000);
+}
 
-// تهيئة العجلة عند تحميل الصفحة
+spinLeft.addEventListener('click', () => spinWheel(-60));
+spinRight.addEventListener('click', () => spinWheel(60));
+
+// التهيئة
 window.addEventListener('load', () => {
   createWheel();
 });
