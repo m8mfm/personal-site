@@ -1,348 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Me</title>
   <style>
-    /* Modern CSS Reset */
-    :root {
-      --primary: #4361ee;
-      --primary-dark: #3a0ca3;
-      --accent: #4cc9f0;
-      --dark: #1a1a2e;
-      --darker: #16213e;
-      --light: #f8f9fa;
-      --gray: #6c757d;
-      --success: #4bb543;
-    }
-    
-    *, *::before, *::after {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
     }
     
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, var(--darker), var(--dark));
-      color: var(--light);
-      min-height: 100vh;
+      background: #f8f9fa;
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2rem;
-      line-height: 1.6;
+      min-height: 100vh;
+      padding: 20px;
     }
     
-    @supports (font-variation-settings: normal) {
-      body { font-family: 'Inter var', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
-    }
-    
-    /* Contact Container */
     .contact-container {
       width: 100%;
-      max-width: 520px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 16px;
-      padding: 2.5rem;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      position: relative;
+      max-width: 500px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
       overflow: hidden;
-      transform: translateY(20px);
-      opacity: 0;
-      animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
     }
     
-    .contact-container::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(67, 97, 238, 0.15) 0%, transparent 70%);
-      z-index: -1;
-      animation: rotate 20s linear infinite;
-    }
-    
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
-    /* Header */
     .contact-header {
+      background: #2b2d42;
+      color: white;
+      padding: 25px;
       text-align: center;
-      margin-bottom: 2rem;
     }
     
     .contact-header h2 {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.5px;
+      font-size: 24px;
+      margin-bottom: 5px;
     }
     
-    .contact-header p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 0.95rem;
+    .contact-form {
+      padding: 25px;
     }
     
-    /* Form Elements */
     .form-group {
-      margin-bottom: 1.5rem;
-      position: relative;
+      margin-bottom: 20px;
     }
     
-    .form-group:last-child {
-      margin-bottom: 1rem;
-    }
-    
-    .form-label {
+    .form-group label {
       display: block;
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.8);
-      transition: all 0.3s ease;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #495057;
     }
     
-    .form-control {
+    .form-group input,
+    .form-group textarea {
       width: 100%;
-      padding: 0.85rem 1.25rem;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-      font-size: 0.95rem;
-      color: var(--light);
-      transition: all 0.3s ease;
+      padding: 12px 15px;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+      font-size: 16px;
+      transition: border 0.3s;
     }
     
-    .form-control::placeholder {
-      color: rgba(255, 255, 255, 0.4);
-    }
-    
-    .form-control:focus {
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #4361ee;
       outline: none;
-      border-color: var(--primary);
-      background: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
     }
     
-    textarea.form-control {
-      min-height: 140px;
+    .form-group textarea {
+      min-height: 120px;
       resize: vertical;
     }
     
-    /* Submit Button */
     .submit-btn {
-      width: 100%;
-      padding: 1rem;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      background: #4361ee;
       color: white;
       border: none;
-      border-radius: 8px;
-      font-size: 1rem;
+      padding: 14px;
+      width: 100%;
+      font-size: 16px;
       font-weight: 600;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-      position: relative;
-      overflow: hidden;
+      transition: background 0.3s;
     }
     
     .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+      background: #3a0ca3;
     }
     
-    .submit-btn:active {
-      transform: translateY(0);
-    }
-    
-    .submit-btn::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        to bottom right,
-        rgba(255, 255, 255, 0) 0%,
-        rgba(255, 255, 255, 0.1) 50%,
-        rgba(255, 255, 255, 0) 100%
-      );
-      transform: rotate(30deg);
-      transition: all 0.3s ease;
-    }
-    
-    .submit-btn:hover::after {
-      left: 100%;
-    }
-    
-    /* Social Links */
-    .social-links {
-      margin-top: 2rem;
+    .social-section {
       text-align: center;
+      padding: 20px;
+      border-top: 1px solid #e9ecef;
     }
     
-    .social-links p {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    
-    .social-links p::before,
-    .social-links p::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      width: 20%;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.2);
-    }
-    
-    .social-links p::before {
-      left: 0;
-    }
-    
-    .social-links p::after {
-      right: 0;
+    .social-section p {
+      margin-bottom: 15px;
+      color: #6c757d;
     }
     
     .social-icons {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 20px;
     }
     
     .social-icon {
       width: 40px;
       height: 40px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 50%;
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 1.2rem;
-      transition: all 0.3s ease;
+      color: white;
+      font-size: 20px;
+      text-decoration: none;
+      transition: transform 0.3s;
     }
     
     .social-icon:hover {
-      background: var(--primary);
-      color: white;
-      transform: translateY(-3px) scale(1.1);
+      transform: scale(1.1);
     }
     
-    /* Hidden Fields */
-    .hidden-field {
-      position: absolute;
-      left: -9999px;
-      opacity: 0;
-    }
+    .instagram { background: #e1306c; }
+    .telegram { background: #0088cc; }
     
-    /* Status Message */
+    .hidden-field { display: none; }
+    
     .status-message {
-      padding: 0.75rem 1rem;
-      border-radius: 8px;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
       display: none;
     }
     
-    .status-message.success {
-      background: rgba(75, 181, 67, 0.2);
-      border: 1px solid var(--success);
-      color: var(--success);
+    .success {
+      background: #d4edda;
+      color: #155724;
       display: block;
     }
     
-    .status-message.error {
-      background: rgba(220, 53, 69, 0.2);
-      border: 1px solid #dc3545;
-      color: #dc3545;
+    .error {
+      background: #f8d7da;
+      color: #721c24;
       display: block;
-    }
-    
-    /* Floating Label Effect */
-    .floating-label-group {
-      position: relative;
-      margin-bottom: 1.5rem;
-    }
-    
-    .floating-label {
-      position: absolute;
-      top: 0.85rem;
-      left: 1.25rem;
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.6);
-      pointer-events: none;
-      transition: all 0.2s ease;
-    }
-    
-    .form-control:focus ~ .floating-label,
-    .form-control:not(:placeholder-shown) ~ .floating-label {
-      top: -0.6rem;
-      left: 0.8rem;
-      font-size: 0.75rem;
-      background: var(--darker);
-      padding: 0 0.3rem;
-      color: var(--accent);
-    }
-    
-    /* Input Icons */
-    .input-icon {
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(255, 255, 255, 0.4);
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 576px) {
-      .contact-container {
-        padding: 1.5rem;
-      }
-      
-      .contact-header h2 {
-        font-size: 1.5rem;
-      }
-      
-      .social-links p::before,
-      .social-links p::after {
-        width: 15%;
-      }
     }
   </style>
-  <!-- Inter font from Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="contact-container">
     <div class="contact-header">
-      <h2>Get In Touch</h2>
-      <p>Have a project in mind or want to collaborate? Send me a message.</p>
+      <h2>Contact Me</h2>
+      <p>Send me a message and I'll respond as soon as possible</p>
     </div>
     
-    <form action="https://formsubmit.co/cd68f26b339ebe47
+    <form class="contact-form" action="https://formsubmit.co/cd68f26b339ebe47b3cfa4e2d92b6ed2" method="POST">
+      <!-- Honeypot field -->
+      <input type="text" name="_honey" class="hidden-field">
+      
+      <!-- Disable Captcha -->
+      <input type="hidden" name="_captcha" value="false">
+      
+      <!-- Thank you page -->
+      <input type="hidden" name="_next" value="https://m8mfm.vercel.app/thankyou.html">
+      
+      <!-- Status message -->
+      <div id="statusMessage" class="status-message"></div>
+      
+      <!-- Name field -->
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      
+      <!-- Email field -->
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      
+      <!-- Message field -->
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      
+      <!-- Submit button -->
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+    
+    <!-- Social media section -->
+    <div class="social-section">
+      <p>Or contact me directly via</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/m7madmahmoud_" class="social-icon instagram" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="https://t.me/m8mfm" class="social-icon telegram" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21.2 2.8c-1.6-1-6.3-2.3-9.7-1.2-2.6.8-3.4 3.1-3.7 4.4-1.8 7-3.1 13.9-4.4 20.8-.1.6.2 1.1.8 1 .9-.1 1.1-.8 1.3-1.4.4-1.6 1.1-3.1 1.6-4.7.4-1.2 2.5-1.9 3.5-1 .4.4.3 1-.1 1.4-.8.8-1.8 1.7-2.6 2.5-.4.4-.3 1.1.2 1.3 1.1.4 2.3.7 3.4 1 .5.1 1.1-.2 1.3-.7 1.2-2.9 2.4-5.8 3.6-8.7.2-.5.6-.9 1-1.2.8-.6 2.1-1.5 1.1-2.5-.4-.4-1.1-.3-1.7-.1z"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Form submission handling
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('.submit-btn');
+      const statusMessage = document.getElementById('statusMessage');
+      
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+      
+      fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          statusMessage.textContent = 'Message sent successfully!';
+          statusMessage.className = 'status-message success';
+          form.reset();
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      })
+      .catch(error => {
+        statusMessage.textContent = 'Error sending message. Please try again.';
+        statusMessage.className = 'status-message error';
+      })
+      .finally(() => {
+        submitBtn.textContent = 'Send Message';
+        submitBtn.disabled = false;
+      });
+    });
+  </script>
+</body>
+</html>
