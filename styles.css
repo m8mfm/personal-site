@@ -355,6 +355,30 @@ body {
     gap: 1.5rem;
 }
 
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: white;
+    border-radius: 50%;
+    animation: star-fly 1s linear forwards;
+    box-shadow: 0 0 5px 1px white;
+}
+
+@keyframes star-fly {
+    0% { 
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+    100% { 
+        transform: translate(
+            calc(var(--random-x) * 100px),
+            calc(var(--random-y) * 100px)
+        );
+        opacity: 0;
+    }
+}
+
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
