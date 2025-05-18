@@ -181,6 +181,92 @@ document.getElementById('exploreBtn').addEventListener('mousemove', (e) => {
     e.target.style.setProperty('--mouse-y', `${y}px`);
 });
 
+// ===== 3D Background with Three.js =====
+const container = document.getElementById('webgl-container');
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+container.appendChild(renderer.domElement);
+
+// Create floating geometry
+const geometry = new THREE.IcosahedronGeometry(1, 0);
+const material = new THREE.MeshBasicMaterial({ 
+    color: 0x00f7ff,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.7
+});
+
+const particles = [];
+for (let i = 0; i < 20; i++) {
+    const particle = new THREE.Mesh(geometry, material);
+    particle.position.x = (Math.random() - 0.5) * 20;
+    particle.position.y = (Math.random() - 0.5) * 20;
+    particle.position.z = (Math.random() - 0.5) * 20;
+    particle.scale.setScalar(Math.random() * 0.5 + 0.5);
+    scene.add(particle);
+    particles.push(particle);
+}
+
+camera.position.z = 5;
+
+// Animation loop
+function animate() {
+    requestAnimationFrame(animate);
+    
+    particles.forEach(particle => {
+        particle.rotation.x += 0.005;
+        particle.rotation.y += 0.01;
+        particle.position.x += Math.sin(Date.now() * 0.001) * 0.01;
+        particle.position.y += Math.cos(Date.now() * 0.001) * 0.01;
+    });
+    
+    renderer.render(scene, camera);
+}
+animate();
+
+// ===== Star Particles on Button =====
+document.getElementById('magicBtn').addEventListener('mouseenter', function() {
+    const hoverSound = document.getElementById('hoverSound');
+    hoverSound.currentTime = 0;
+    hoverSound.play();
+    
+    const button = this;
+    const stars = button.querySelector('.star-particles');
+    
+    // Create 30 stars
+    for (let i = 0; i < 30; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.animationDelay = `${Math.random() * 0.5}s`;
+        stars.appendChild(star);
+        
+        // Remove star after animation
+        setTimeout(() => {
+            star.remove();
+        }, 1000);
+    }
+});
+
+// ===== Responsive Design =====
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+// ===== Dynamic Background Color Change =====
+const colors = ['#0f0a1a', '#1a0f2e', '#0a1a1a', '#1a0a17'];
+let currentColor = 0;
+
+setInterval(() => {
+    document.body.style.backgroundColor = colors[currentColor];
+    currentColor = (currentColor + 1) % colors.length;
+}, 10000);
+
 // ===== Initialize Everything =====
 window.addEventListener('load', () => {
     initParticles();
