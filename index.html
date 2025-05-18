@@ -1,108 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-    <title>Mohammed Mahmoud - Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="loading-screen">
-      <div class="spinner"></div>
-    </div>
-
-    <header>
-      <h1>Mohammed Mahmoud</h1>
-      <p>Frontend Developer | UI/UX Enthusiast</p>
-      <div class="social-icons">
-        <a href="https://github.com" target="_blank">&#x1F5C3;</a>
-        <a href="https://linkedin.com" target="_blank">&#x1F465;</a>
-        <a href="https://twitter.com" target="_blank">&#x1F426;</a>
-      </div>
-      <button id="toggle-mode" class="toggle-btn">🌙</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Doe | Senior Frontend Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="hero-section">
+        <canvas id="particleCanvas"></canvas>
+        <nav class="glass-nav">
+            <div class="nav-brand">JD</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#expertise">Expertise</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero-content">
+            <h1 class="text-gradient">Innovative Digital Experiences</h1>
+            <p class="hero-subtitle">I design and build performant web solutions with cutting-edge technologies</p>
+            <button class="cta-button" id="exploreBtn">Explore My Work ↓</button>
+        </div>
     </header>
-    <div class="section">
-      <h2>Skills Wheel</h2>
-      <div class="wheel-container">
-        <div class="wheel-controls">
-          <button class="wheel-btn" id="spin-left">◀</button>
-          <div class="wheel-wrapper">
-            <div class="wheel" id="skills-wheel"></div>
-          </div>
-          <button class="wheel-btn" id="spin-right">▶</button>
-        </div>
-        <div class="wheel-info">
-          <div class="skill-info" id="skill-info">
-            <h3>Select a Skill</h3>
-            <p>Click on a skill or use arrows to spin the wheel</p>
-          </div>
-          <button class="expand-btn" id="expand-btn">Show Details ▼</button>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="section">
-        <h2>About Me</h2>
-        <p>
-          Hi! I'm a passionate frontend developer with 3+ years of experience in
-          building responsive and user-friendly websites. I love creating
-          beautiful interfaces and solving user problems with clean code.
-        </p>
-      </div>
 
-      <a href="https://t.me/m8mfm" target="_blank" class="telegram-icon">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png"
-          alt="Telegram"
-          width="30"
-          height="30"
-        />
-      </a>
-    </div>
-    <div class="section">
-      <h2>Skills</h2>
-      <div data-aos="fade-left" class="skills-list">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>React</span>
-        <span>Python</span>
-        <span>English</span>
-      </div>
+    <main>
+        <section id="about" class="section fade-in">
+            <div class="section-header">
+                <span class="section-tag">01</span>
+                <h2>About Me</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Senior Frontend Developer with 8+ years creating award-winning digital products. Specialized in performance optimization and interactive experiences.</p>
+                    <div class="signature">John Doe</div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="projectsCompleted">0</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="clientsServed">0</div>
+                        <div class="stat-label">Clients</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div class="section">
-        <h2>Resume</h2>
-        <a href="resume.pdf" class="resume-btn" download>Download CV</a>
-      </div>
-    </div>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <section id="expertise" class="section dark-bg fade-in">
+            <div class="section-header">
+                <span class="section-tag">02</span>
+                <h2>Technical Expertise</h2>
+            </div>
+            <div class="skills-container" id="skillsContainer"></div>
+        </section>
+    </main>
+
     <script src="script.js"></script>
-    <script>
-      window.addEventListener("load", function () {
-        const loadingScreen = document.getElementById("loading-screen");
-        loadingScreen.style.display = "none"; // يخفي الشاشة لما يخلص تحميل الصفحة
-      });
-    </script>
-    <script>
-      AOS.init({
-        duration: 800, // مدة الحركة بالملي ثانية
-        easing: "ease-in-out",
-        once: true, // الحركة تظهر مرة وحدة بس
-      });
-    </script>
-    <script>
-      // تأخير تحميل JS حتى يكتمل تحميل الصفحة
-      window.addEventListener("load", function () {
-        const script = document.createElement("script");
-        script.src = "script.js";
-        document.body.appendChild(script);
-      });
-    </script>
-  </body>
+</body>
 </html>
