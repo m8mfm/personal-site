@@ -1,133 +1,195 @@
-// Dark Mode الصحيح
-document.addEventListener("DOMContentLoaded", function() {
-  const toggleBtn = document.getElementById("toggle-mode");
-  const savedMode = localStorage.getItem("mode");
-  
-  if (savedMode === "dark") {
-    document.body.classList.add("dark-mode");
-    toggleBtn.textContent = "☀️";
-  }
-  
-  toggleBtn.addEventListener("click", () => {
-    document.body.classList.toggle("dark-mode");
-    const isDark = document.body.classList.contains("dark-mode");
-    toggleBtn.textContent = isDark ? "☀️" : "🌙";
-    localStorage.setItem("mode", isDark ? "dark" : "light");
-  });
-});
-  // شريط التقدم
-  const progressContainer = document.createElement('div');
-  progressContainer.className = 'progress-container';
-  const progressBar = document.createElement('div');
-  progressBar.className = 'progress-bar';
-  progressContainer.appendChild(progressBar);
-  document.body.prepend(progressContainer);
+// ===== Modern Particle Background =====
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-  window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    progressBar.style.width = scrolled + '%';
-  });
+const particles = [];
+const particleCount = window.innerWidth < 768 ? 30 : 100;
 
-  // زر العودة للأعلى
-  const backToTopBtn = document.createElement('div');
-  backToTopBtn.className = 'back-to-top';
-  backToTopBtn.innerHTML = '↑';
-  document.body.appendChild(backToTopBtn);
-
-  backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  });
-
-  window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-      backToTopBtn.classList.add('show');
-    } else {
-      backToTopBtn.classList.remove('show');
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 1 - 0.5;
+        this.speedY = Math.random() * 1 - 0.5;
+        this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`;
     }
-  });
+    
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+    }
+    
+    draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+}
 
-  // تأثيرات عند التحميل
-  setTimeout(() => {
-    document.querySelectorAll('.section').forEach((section, index) => {
-      setTimeout(() => {
-        section.style.opacity = '1';
-        section.style.transform = 'translateY(0)';
-      }, index * 200);
+function initParticles() {
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+        
+        for (let j = i; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 100) {
+                ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - distance / 500})`;
+                ctx.lineWidth = 0.5;
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+    
+    requestAnimationFrame(animateParticles);
+}
+
+// ===== Animated Counter =====
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            clearInterval(timer);
+            current = target;
+        }
+        element.textContent = Math.floor(current);
+    }, 16);
+}
+
+// ===== Skills Generator =====
+const skillsData = [
+    { name: "JavaScript (ES6+)", level: 95, icon: "🟨" },
+    { name: "HTML5 & CSS3", level: 98, icon: "🟧" },
+    { name: "Responsive Design", level: 90, icon: "📱" },
+    { name: "UI/UX Principles", level: 85, icon: "🎨" },
+    { name: "Performance Optimization", level: 88, icon: "⚡" },
+    { name: "Web Accessibility", level: 82, icon: "♿" },
+    { name: "Cross-Browser Testing", level: 80, icon: "🌐" },
+    { name: "Git Version Control", level: 85, icon: "🔀" }
+];
+
+function generateSkills() {
+    const container = document.getElementById('skillsContainer');
+    
+    skillsData.forEach(skill => {
+        const skillElement = document.createElement('div');
+        skillElement.className = 'skill-card';
+        skillElement.innerHTML = `
+            <div class="skill-header">
+                <span class="skill-icon">${skill.icon}</span>
+                <h3 class="skill-name">${skill.name}</h3>
+            </div>
+            <div class="skill-bar">
+                <div class="skill-progress" style="width: 0%" data-level="${skill.level}"></div>
+            </div>
+            <span class="skill-percent">0%</span>
+        `;
+        container.appendChild(skillElement);
     });
-  }, 500);
+}
+
+// ===== Animate Skills on Scroll =====
+function animateSkills() {
+    const skillBars = document.querySelectorAll('.skill-progress');
+    const skillPercents = document.querySelectorAll('.skill-percent');
+    
+    skillBars.forEach((bar, index) => {
+        const level = bar.dataset.level;
+        let width = 0;
+        const interval = setInterval(() => {
+            if (width >= level) {
+                clearInterval(interval);
+            } else {
+                width++;
+                bar.style.width = `${width}%`;
+                skillPercents[index].textContent = `${width}%`;
+            }
+        }, 20);
+    });
+}
+
+// ===== Intersection Observer =====
+function setupIntersectionObserver() {
+    const sections = document.querySelectorAll('.section');
+    const options = {
+        threshold: 0.1
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                
+                if (entry.target.id === 'about') {
+                    animateCounter(document.getElementById('projectsCompleted'), 120);
+                    animateCounter(document.getElementById('clientsServed'), 45);
+                }
+                
+                if (entry.target.id === 'expertise') {
+                    animateSkills();
+                }
+            }
+        });
+    }, options);
+    
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+}
+
+// ===== Smooth Scrolling =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
 });
 
+// ===== CTA Button Effect =====
+document.getElementById('exploreBtn').addEventListener('mousemove', (e) => {
+    const rect = e.target.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.target.style.setProperty('--mouse-x', `${x}px`);
+    e.target.style.setProperty('--mouse-y', `${y}px`);
+});
 
-document.addEventListener("DOMContentLoaded", function() {
-  // بيانات المهارات
-  const skillsData = [
-    { name: "HTML5", description: "Semantic markup expert", level: "Advanced" },
-    { name: "CSS3", description: "Modern layouts specialist", level: "Advanced" },
-    { name: "JavaScript", description: "ES6+ features", level: "Intermediate" },
-    { name: "React", description: "Component architecture", level: "Intermediate" },
-    { name: "Python", description: "Scripting & automation", level: "Basic" },
-    { name: "English", description: "Professional fluency", level: "Advanced" }
-  ];
-
-  // إنشاء العجلة
-  function createWheel() {
-    const wheel = document.getElementById('skills-wheel');
-    wheel.innerHTML = ''; // تنظيف العجلة أولاً
+// ===== Initialize Everything =====
+window.addEventListener('load', () => {
+    initParticles();
+    animateParticles();
+    generateSkills();
+    setupIntersectionObserver();
     
-    skillsData.forEach((skill, index) => {
-      const segment = document.createElement('div');
-      segment.className = `skill-segment segment-${index + 1}`;
-      segment.innerHTML = `
-        <span style="transform: skewY(-30deg) rotate(30deg); 
-                    display: block;
-                    width: 80px;
-                    text-align: center;
-                    margin-left: -40px;">
-          ${skill.name}
-        </span>`;
-      
-      segment.addEventListener('click', () => showSkillInfo(skill));
-      wheel.appendChild(segment);
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
     });
-  }
-
-  // عرض معلومات المهارة
-  function showSkillInfo(skill) {
-    const infoBox = document.getElementById('skill-info');
-    infoBox.innerHTML = `
-      <h3>${skill.name}</h3>
-      <p><strong>Level:</strong> ${skill.level}</p>
-      <p>${skill.description}</p>
-    `;
-  }
-
-  // تدوير العجلة
-  let currentAngle = 0;
-  const wheel = document.getElementById('skills-wheel');
-  
-  document.getElementById('spin-left').addEventListener('click', function() {
-    currentAngle -= 60;
-    wheel.style.transform = `rotate(${currentAngle}deg)`;
-    updateActiveSkill();
-  });
-  
-  document.getElementById('spin-right').addEventListener('click', function() {
-    currentAngle += 60;
-    wheel.style.transform = `rotate(${currentAngle}deg)`;
-    updateActiveSkill();
-  });
-
-  // تحديث المهارة النشطة
-  function updateActiveSkill() {
-    const segmentIndex = Math.floor(((360 - (currentAngle % 360)) / 60) % skillsData.length;
-    showSkillInfo(skillsData[segmentIndex]);
-  }
-
-  // التهيئة الأولية
-  createWheel();
 });
