@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const particles = [];
+const bgParticles = [];
 const particleCount = window.innerWidth < 768 ? 30 : 100;
 
 class Particle {
@@ -16,15 +16,15 @@ class Particle {
         this.speedY = Math.random() * 1 - 0.5;
         this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.1})`;
     }
-    
+
     update() {
         this.x += this.speedX;
         this.y += this.speedY;
-        
+
         if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
         if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
     }
-    
+
     draw() {
         ctx.fillStyle = this.color;
         ctx.beginPath();
@@ -35,42 +35,40 @@ class Particle {
 
 function initParticles() {
     for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
+        bgParticles.push(new Particle());
     }
 }
 
 function animateParticles() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    for (let i = 0; i < particles.length; i++) {
-        particles[i].update();
-        particles[i].draw();
-        
-        for (let j = i; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
+
+    for (let i = 0; i < bgParticles.length; i++) {
+        bgParticles[i].update();
+        bgParticles[i].draw();
+
+        for (let j = i; j < bgParticles.length; j++) {
+            const dx = bgParticles[i].x - bgParticles[j].x;
+            const dy = bgParticles[i].y - bgParticles[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            
+
             if (distance < 100) {
                 ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - distance / 500})`;
                 ctx.lineWidth = 0.5;
                 ctx.beginPath();
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.moveTo(bgParticles[i].x, bgParticles[i].y);
+                ctx.lineTo(bgParticles[j].x, bgParticles[j].y);
                 ctx.stroke();
             }
         }
     }
-    
+
     requestAnimationFrame(animateParticles);
 }
 
-// ===== Animated Counter =====
 function animateCounter(element, target, duration = 2000) {
-    const start = 0;
     const increment = target / (duration / 16);
-    let current = start;
-    
+    let current = 0;
+
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
@@ -81,7 +79,6 @@ function animateCounter(element, target, duration = 2000) {
     }, 16);
 }
 
-// ===== Skills Generator =====
 const skillsData = [
     { name: "JavaScript (ES6+)", level: 95, icon: "🟨" },
     { name: "HTML5 & CSS3", level: 98, icon: "🟧" },
@@ -95,7 +92,6 @@ const skillsData = [
 
 function generateSkills() {
     const container = document.getElementById('skillsContainer');
-    
     skillsData.forEach(skill => {
         const skillElement = document.createElement('div');
         skillElement.className = 'skill-card';
@@ -113,13 +109,12 @@ function generateSkills() {
     });
 }
 
-// ===== Animate Skills on Scroll =====
 function animateSkills() {
     const skillBars = document.querySelectorAll('.skill-progress');
     const skillPercents = document.querySelectorAll('.skill-percent');
-    
+
     skillBars.forEach((bar, index) => {
-        const level = bar.dataset.level;
+        const level = parseInt(bar.dataset.level);
         let width = 0;
         const interval = setInterval(() => {
             if (width >= level) {
@@ -133,47 +128,37 @@ function animateSkills() {
     });
 }
 
-// ===== Intersection Observer =====
 function setupIntersectionObserver() {
     const sections = document.querySelectorAll('.section');
-    const options = {
-        threshold: 0.1
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                
                 if (entry.target.id === 'about') {
                     animateCounter(document.getElementById('projectsCompleted'), 120);
                     animateCounter(document.getElementById('clientsServed'), 45);
                 }
-                
                 if (entry.target.id === 'expertise') {
                     animateSkills();
                 }
             }
         });
-    }, options);
-    
-    sections.forEach(section => {
-        observer.observe(section);
-    });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => observer.observe(section));
 }
 
-// ===== Smooth Scrolling =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 });
 
-// ===== CTA Button Effect =====
-document.getElementById('exploreBtn').addEventListener('mousemove', (e) => {
+document.getElementById('exploreBtn').addEventListener('mousemove', e => {
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
@@ -189,53 +174,40 @@ const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 container.appendChild(renderer.domElement);
 
-// Create floating geometry
 const geometry = new THREE.IcosahedronGeometry(1, 0);
-const material = new THREE.MeshBasicMaterial({ 
-    color: 0x00f7ff,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.7
-});
+const material = new THREE.MeshBasicMaterial({ color: 0x00f7ff, wireframe: true, transparent: true, opacity: 0.7 });
 
-const particles = [];
+const meshParticles = [];
 for (let i = 0; i < 20; i++) {
-    const particle = new THREE.Mesh(geometry, material);
-    particle.position.x = (Math.random() - 0.5) * 20;
-    particle.position.y = (Math.random() - 0.5) * 20;
-    particle.position.z = (Math.random() - 0.5) * 20;
-    particle.scale.setScalar(Math.random() * 0.5 + 0.5);
-    scene.add(particle);
-    particles.push(particle);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20
+    );
+    mesh.scale.setScalar(Math.random() * 0.5 + 0.5);
+    scene.add(mesh);
+    meshParticles.push(mesh);
 }
 
 camera.position.z = 5;
 
-// Animation loop
 function animate() {
     requestAnimationFrame(animate);
-    
-    particles.forEach(particle => {
+    meshParticles.forEach(particle => {
         particle.rotation.x += 0.005;
         particle.rotation.y += 0.01;
-        particle.position.x += Math.sin(Date.now() * 0.001) * 0.01;
-        particle.position.y += Math.cos(Date.now() * 0.001) * 0.01;
     });
-    
     renderer.render(scene, camera);
 }
 animate();
 
-// ===== Star Particles on Button =====
 document.getElementById('magicBtn').addEventListener('mouseenter', function() {
     const hoverSound = document.getElementById('hoverSound');
     hoverSound.currentTime = 0;
     hoverSound.play();
-    
-    const button = this;
-    const stars = button.querySelector('.star-particles');
-    
-    // Create 30 stars
+
+    const stars = this.querySelector('.star-particles');
     for (let i = 0; i < 30; i++) {
         const star = document.createElement('div');
         star.className = 'star';
@@ -243,39 +215,28 @@ document.getElementById('magicBtn').addEventListener('mouseenter', function() {
         star.style.top = `${Math.random() * 100}%`;
         star.style.animationDelay = `${Math.random() * 0.5}s`;
         stars.appendChild(star);
-        
-        // Remove star after animation
-        setTimeout(() => {
-            star.remove();
-        }, 1000);
+        setTimeout(() => star.remove(), 1000);
     }
 });
 
-// ===== Responsive Design =====
 window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// ===== Dynamic Background Color Change =====
 const colors = ['#0f0a1a', '#1a0f2e', '#0a1a1a', '#1a0a17'];
 let currentColor = 0;
-
 setInterval(() => {
     document.body.style.backgroundColor = colors[currentColor];
     currentColor = (currentColor + 1) % colors.length;
 }, 10000);
 
-// ===== Initialize Everything =====
 window.addEventListener('load', () => {
     initParticles();
     animateParticles();
     generateSkills();
     setupIntersectionObserver();
-    
-    window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
 });
