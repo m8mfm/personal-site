@@ -1,182 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Contact Me - Premium Style</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-<style>
-  /* خلفية هادئة متدرجة */
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #2a2a72, #009ffd);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-  }
-
-  /* صندوق الفورم */
-  .contact-box {
-    background: rgba(255 255 255 / 0.1);
-    border-radius: 25px;
-    padding: 3rem 3.5rem;
-    width: 100%;
-    max-width: 500px;
-    box-shadow:
-      0 0 10px rgba(255, 255, 255, 0.2),
-      0 0 40px #00c3ff55,
-      inset 0 0 60px #00c3ff99;
-    backdrop-filter: blur(12px);
-    transition: box-shadow 0.4s ease-in-out;
-  }
-  /* تأثير لمعان عند التركيز داخل الفورم */
-  .contact-box:focus-within {
-    box-shadow:
-      0 0 20px #00d0ff,
-      0 0 50px #00d0ffcc,
-      inset 0 0 70px #00d0ffdd;
-  }
-
-  h2 {
-    text-align: center;
-    font-weight: 700;
-    font-size: 2.4rem;
-    margin-bottom: 2rem;
-    letter-spacing: 1.3px;
-    text-shadow: 0 0 15px #00c3ffaa;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  input, textarea {
-    background: rgba(255 255 255 / 0.15);
-    border: none;
-    border-radius: 15px;
-    padding: 1.2rem 1.5rem;
-    margin-bottom: 1.4rem;
-    font-size: 1.1rem;
-    color: #fff;
-    box-shadow: inset 0 0 12px rgba(0, 195, 255, 0.5);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-  }
-  input::placeholder, textarea::placeholder {
-    color: rgba(255 255 255 / 0.7);
-    font-weight: 500;
-  }
-  input:focus, textarea:focus {
-    outline: none;
-    background: rgba(0, 195, 255, 0.2);
-    box-shadow: 0 0 14px 3px #00c3ffcc;
-    color: #e0f7ff;
-  }
-  textarea {
-    resize: vertical;
-    min-height: 140px;
-  }
-
-  button {
-    background: linear-gradient(45deg, #00c3ff, #0072ff);
-    border: none;
-    border-radius: 20px;
-    padding: 1.2rem 0;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #fff;
-    cursor: pointer;
-    box-shadow:
-      0 4px 15px #00c3ffbb,
-      inset 0 -3px 10px #0072ffaa;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  button:hover {
-    transform: scale(1.12);
-    box-shadow:
-      0 0 25px 5px #00e5ff,
-      inset 0 -4px 15px #0098ff;
-  }
-
-  .footer {
-    margin-top: 2.8rem;
-    text-align: center;
-    font-size: 1rem;
-    color: rgba(255 255 255 / 0.75);
-    user-select: none;
-    font-weight: 600;
-    letter-spacing: 1.1px;
-  }
-
-  .socials {
-    margin-top: 0.8rem;
-  }
-  .socials a {
-    margin: 0 14px;
-    display: inline-block;
-    transition: transform 0.35s ease, filter 0.35s ease;
-  }
-  .socials a:hover {
-    transform: scale(1.6);
-    filter: drop-shadow(0 0 10px #00c3ffcc);
-  }
-  .socials img {
-    width: 32px;
-    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
-  }
-
-  /* خفيت الhoney pot */
-  .hidden {
-    display: none;
-  }
-</style>
-
-<!-- Google reCAPTCHA API -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Me</title>
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #1e2a38, #33475b);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .contact-container {
+      background: rgba(255 255 255 / 0.05);
+      border-radius: 12px;
+      padding: 30px 40px;
+      max-width: 450px;
+      width: 100%;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      color: #f9f9f9;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    input, textarea {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+      background: rgba(255 255 255 / 0.15);
+      color: #eee;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    input::placeholder,
+    textarea::placeholder {
+      color: #ccc;
+    }
+    input:focus, textarea:focus {
+      background: rgba(255 255 255 / 0.25);
+      box-shadow: 0 0 8px #6ab7ff;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      font-family: inherit;
+    }
+    button {
+      background: #3b82f6;
+      color: white;
+      font-weight: 700;
+      padding: 14px 0;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 5px 10px #3b82f6aa;
+    }
+    button:hover {
+      background: #2563eb;
+      box-shadow: 0 6px 14px #2563ebcc;
+    }
+    /* Honeypot field - hidden */
+    .hidden-field {
+      position: absolute;
+      left: -9999px;
+      visibility: hidden;
+    }
+    /* reCAPTCHA container */
+    .g-recaptcha {
+      margin: 15px 0 10px 0;
+      transform-origin: left center;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+    }
+    /* Animate recaptcha */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+    }
+    /* Contact via social */
+    .contact-via {
+      margin-top: 28px;
+      text-align: center;
+      font-size: 1rem;
+      color: #aaa;
+      user-select: none;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .social-icons {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+    }
+    .social-icons a {
+      color: #bbb;
+      font-size: 1.8rem;
+      transition: transform 0.25s ease, color 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .social-icons a:hover {
+      color: #3b82f6;
+      transform: scale(1.3);
+    }
+  </style>
+  <!-- Google reCAPTCHA script -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-  <div class="contact-box">
+  <div class="contact-container">
     <h2>Contact Me</h2>
-    <form id="contact-form" action="https://formsubmit.co/cd68f26b339ebe47b3cfa4e2d92b6ed2" method="POST" novalidate>
+    <form action="https://formsubmit.co/khibrahim708@gmail.com" method="POST" id="contactForm" novalidate>
       <input type="text" name="name" placeholder="Your Name" required autocomplete="name" />
       <input type="email" name="email" placeholder="Your Email" required autocomplete="email" />
-      <input type="text" name="subject" placeholder="Subject" required />
       <textarea name="message" placeholder="Your Message" required></textarea>
-
-      <input type="text" name="_honey" class="hidden" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_next" value="thank-you.html" />
-
-      <!-- Google reCAPTCHA -->
-      <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
-
+      <!-- Honeypot field -->
+      <input type="text" name="_honey" class="hidden-field" tabindex="-1" autocomplete="off" />
+      <!-- Disable Captcha on success (optional) -->
+      <input type="hidden" name="_captcha" value="true" />
+      <!-- reCAPTCHA -->
+      <div class="g-recaptcha" data-sitekey="6Lc2OT8rAAAAALNsflKyVckakBKckqC3lCDwGW0k"></div>
+      <!-- Custom redirect to thank you page -->
+      <input type="hidden" name="_next" value="thankyou.html" />
       <button type="submit">Send Message</button>
     </form>
 
-    <div class="footer">
-      <p>or contact me via</p>
-      <div class="socials">
-        <a href="https://t.me/m8mfm" target="_blank" title="Telegram">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" />
+    <div class="contact-via">
+      Or contact me via
+      <div class="social-icons">
+        <a href="https://www.instagram.com/m7madmahmoud_" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="28" height="28"><path d="M7.75 2C4.1 2 2 4.1 2 7.75v8.5C2 19.9 4.1 22 7.75 22h8.5c3.65 0 5.75-2.1 5.75-5.75v-8.5C22 4.1 19.9 2 16.25 2h-8.5zM20 16.25a3.75 3.75 0 01-3.75 3.75h-8.5A3.75 3.75 0 014 16.25v-8.5A3.75 3.75 0 017.75 4h8.5a3.75 3.75 0 013.75 3.75v8.5z"/><path d="M12 7a5 5 0 100 10 5 5 0 000-10zm0 8.25a3.25 3.25 0 110-6.5 3.25 3.25 0 010 6.5zM17.25 7.5a1.25 1.25 0 11-2.5 0 1.25 1.25 0 012.5 0z"/></svg>
         </a>
-        <a href="https://instagram.com/m7madmahmoud_" target="_blank" title="Instagram">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" />
+        <a href="https://t.me/m8mfm" target="_blank" rel="noopener" aria-label="Telegram">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" width="28" height="28"><path d="M22 2L2 12l5 1.5 1 5.5 3.5-4.5 5 4.5 4.5-13z"/></svg>
         </a>
       </div>
     </div>
   </div>
-
-  <script>
-    // منع الإرسال إذا ما ضغط الزائر على reCAPTCHA
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      if(grecaptcha.getResponse() === '') {
-        e.preventDefault();
-        alert('Please verify you are not a robot.');
-      }
-    });
-  </script>
 </body>
 </html>
