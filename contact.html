@@ -253,5 +253,33 @@
       });
     });
   </script>
+    <script>
+  document.querySelector('.contact-form').addEventListener('submit', function(e) {
+    // احتفظ بالكود الحالي لكن أضف هذا الجزء:
+    const form = e.target;
+    setTimeout(() => {
+      if(form.getAttribute('data-submitted') {
+        window.location.href = "https://m8mfm.vercel.app/thankyou.html";
+      }
+    }, 3000); // انتظر 3 ثواني كحد أقصى
+    
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(() => {
+      form.setAttribute('data-submitted', 'true');
+      window.location.href = "https://m8mfm.vercel.app/thankyou.html";
+    })
+    .catch(() => {
+      document.getElementById('statusMessage').innerHTML = `
+        <div class="error">
+          Failed to redirect. <a href="https://m8mfm.vercel.app/thankyou.html">Click here</a> manually.
+        </div>
+      `;
+    });
+  });
+</script>
 </body>
 </html>
