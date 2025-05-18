@@ -1,112 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact Me - Premium Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  /* خلفية هادئة متدرجة */
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2a2a72, #009ffd);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f9fafb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      color: #1f2937;
-    }
+  /* صندوق الفورم */
+  .contact-box {
+    background: rgba(255 255 255 / 0.1);
+    border-radius: 25px;
+    padding: 3rem 3.5rem;
+    width: 100%;
+    max-width: 500px;
+    box-shadow:
+      0 0 10px rgba(255, 255, 255, 0.2),
+      0 0 40px #00c3ff55,
+      inset 0 0 60px #00c3ff99;
+    backdrop-filter: blur(12px);
+    transition: box-shadow 0.4s ease-in-out;
+  }
+  /* تأثير لمعان عند التركيز داخل الفورم */
+  .contact-box:focus-within {
+    box-shadow:
+      0 0 20px #00d0ff,
+      0 0 50px #00d0ffcc,
+      inset 0 0 70px #00d0ffdd;
+  }
 
-    .card {
-      background: #ffffff;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-      width: 100%;
-      max-width: 500px;
-    }
+  h2 {
+    text-align: center;
+    font-weight: 700;
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+    letter-spacing: 1.3px;
+    text-shadow: 0 0 15px #00c3ffaa;
+  }
 
-    h2 {
-      margin-bottom: 1.5rem;
-      text-align: center;
-      font-weight: 600;
-    }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
 
-    form {
-      display: flex;
-      flex-direction: column;
-    }
+  input, textarea {
+    background: rgba(255 255 255 / 0.15);
+    border: none;
+    border-radius: 15px;
+    padding: 1.2rem 1.5rem;
+    margin-bottom: 1.4rem;
+    font-size: 1.1rem;
+    color: #fff;
+    box-shadow: inset 0 0 12px rgba(0, 195, 255, 0.5);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  input::placeholder, textarea::placeholder {
+    color: rgba(255 255 255 / 0.7);
+    font-weight: 500;
+  }
+  input:focus, textarea:focus {
+    outline: none;
+    background: rgba(0, 195, 255, 0.2);
+    box-shadow: 0 0 14px 3px #00c3ffcc;
+    color: #e0f7ff;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
 
-    input,
-    textarea {
-      padding: 0.9rem;
-      margin-bottom: 1rem;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
+  button {
+    background: linear-gradient(45deg, #00c3ff, #0072ff);
+    border: none;
+    border-radius: 20px;
+    padding: 1.2rem 0;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    box-shadow:
+      0 4px 15px #00c3ffbb,
+      inset 0 -3px 10px #0072ffaa;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  button:hover {
+    transform: scale(1.12);
+    box-shadow:
+      0 0 25px 5px #00e5ff,
+      inset 0 -4px 15px #0098ff;
+  }
 
-    input:focus,
-    textarea:focus {
-      outline: none;
-      border-color: #2563eb;
-    }
+  .footer {
+    margin-top: 2.8rem;
+    text-align: center;
+    font-size: 1rem;
+    color: rgba(255 255 255 / 0.75);
+    user-select: none;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+  }
 
-    button {
-      padding: 0.9rem;
-      background-color: #2563eb;
-      color: white;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
+  .socials {
+    margin-top: 0.8rem;
+  }
+  .socials a {
+    margin: 0 14px;
+    display: inline-block;
+    transition: transform 0.35s ease, filter 0.35s ease;
+  }
+  .socials a:hover {
+    transform: scale(1.6);
+    filter: drop-shadow(0 0 10px #00c3ffcc);
+  }
+  .socials img {
+    width: 32px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+  }
 
-    button:hover {
-      background-color: #1e40af;
-    }
+  /* خفيت الhoney pot */
+  .hidden {
+    display: none;
+  }
+</style>
 
-    .footer {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-size: 0.95rem;
-      color: #6b7280;
-    }
-
-    .socials a {
-      margin: 0 8px;
-      display: inline-block;
-      transition: transform 0.3s;
-    }
-
-    .socials a:hover {
-      transform: scale(1.2);
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
+<!-- Google reCAPTCHA API -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-  <div class="card">
-    <h2>Let's Get in Touch</h2>
-    <form action="https://formsubmit.co/cd68f26b339ebe47b3cfa4e2d92b6ed2" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
+  <div class="contact-box">
+    <h2>Contact Me</h2>
+    <form id="contact-form" action="https://formsubmit.co/cd68f26b339ebe47b3cfa4e2d92b6ed2" method="POST" novalidate>
+      <input type="text" name="name" placeholder="Your Name" required autocomplete="name" />
+      <input type="email" name="email" placeholder="Your Email" required autocomplete="email" />
       <input type="text" name="subject" placeholder="Subject" required />
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <textarea name="message" placeholder="Your Message" required></textarea>
 
-      <!-- spam protection -->
       <input type="text" name="_honey" class="hidden" />
       <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_next" value="https://m8mfm.vercel.app/thank-you.html" />
+      <input type="hidden" name="_next" value="thank-you.html" />
+
+      <!-- Google reCAPTCHA -->
+      <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div>
 
       <button type="submit">Send Message</button>
     </form>
@@ -115,13 +160,23 @@
       <p>or contact me via</p>
       <div class="socials">
         <a href="https://t.me/m8mfm" target="_blank" title="Telegram">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" width="26" alt="Telegram" />
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" />
         </a>
         <a href="https://instagram.com/m7madmahmoud_" target="_blank" title="Instagram">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" width="26" alt="Instagram" />
+          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" />
         </a>
       </div>
     </div>
   </div>
+
+  <script>
+    // منع الإرسال إذا ما ضغط الزائر على reCAPTCHA
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      if(grecaptcha.getResponse() === '') {
+        e.preventDefault();
+        alert('Please verify you are not a robot.');
+      }
+    });
+  </script>
 </body>
 </html>
