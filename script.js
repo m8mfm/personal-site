@@ -181,6 +181,13 @@ document.getElementById('exploreBtn').addEventListener('mousemove', (e) => {
     e.target.style.setProperty('--mouse-y', `${y}px`);
 });
 
+document.getElementById('exploreBtn').addEventListener('click', function () {
+  document.getElementById('endOfPage').scrollIntoView({
+    behavior: 'smooth'
+  });
+});
+
+
 // ===== Initialize Everything =====
 window.addEventListener('load', () => {
     initParticles();
