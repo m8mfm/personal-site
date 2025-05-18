@@ -10,6 +10,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 3D Background Container -->
+    <div id="webgl-container"></div>
+    
+    <!-- Main Content -->
+    <div class="content">
+        <header class="creative-header">
+            <lottie-player 
+                src="https://assets9.lottiefiles.com/packages/lf20_3rwasyjy.json" 
+                background="transparent" 
+                speed="1" 
+                loop 
+                autoplay
+                class="anim-icon">
+            </lottie-player>
+            
+            <h1 class="neon-text">CREATIVE 
+                <span class="glitch" data-text="DEVELOPER">DEVELOPER</span>
+            </h1>
+            
+            <button class="magic-button" id="magicBtn">
+                <span>Explore the Magic</span>
+                <div class="star-particles"></div>
+            </button>
+            
+            <audio id="hoverSound" src="https://assets.mixkit.co/sfx/preview/mixkit-ui-interface-click-1131.mp3"></audio>
+        </header>
+    </div>
     <header class="hero-section">
         <canvas id="particleCanvas"></canvas>
         <nav class="glass-nav">
@@ -62,5 +89,6 @@
     </main>
 
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </body>
 </html>
