@@ -40,7 +40,72 @@
         transform: translateY(20px);
       }
       to {
+        opacity: <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #e0f7fa, #f1f5f9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .message {
+      text-align: center;
+      animation: fadeInUp 1.5s ease;
+    }
+    .message h1 {
+      font-size: 2rem;
+      color: #0f172a;
+    }
+    .message p {
+      font-size: 1.1rem;
+      color: #334155;
+      margin-top: 0.5rem;
+    }
+    .emoji {
+      font-size: 3rem;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
         opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="message">
+    <div class="emoji">💌</div>
+    <h1>Thank you!</h1>
+    <p>Your message has been sent. I’ll get back to you soon.</p>
+  </div>
+</body>
+</html>
+1;
         transform: translateY(0);
       }
     }
