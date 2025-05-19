@@ -213,6 +213,24 @@ topBtn.addEventListener('click', () => {
     });
 });
 
+window.addEventListener("scroll", () => {
+  const scrollProgress = document.getElementById("scroll-progress");
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop / docHeight) * 100;
+
+  scrollProgress.style.width = `${scrollPercent}%`;
+});
+
+const mainTitle = document.querySelector('.text-gradient');
+
+exploreBtn.addEventListener('click', () => {
+  mainTitle.classList.add('animate-scale');
+  setTimeout(() => {
+    mainTitle.classList.remove('animate-scale');
+  }, 600);
+});
+
 
 // ===== Initialize Everything =====
 window.addEventListener('load', () => {
@@ -226,3 +244,4 @@ window.addEventListener('load', () => {
         canvas.height = window.innerHeight;
     });
 });
+
