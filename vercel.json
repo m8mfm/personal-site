@@ -1,0 +1,67 @@
+{
+  "routes": [
+    // التحويلات الدائمة من .html إلى مسارات نظيفة
+    {
+      "src": "/index.html",
+      "status": 301,
+      "headers": { "Location": "/home" }
+    },
+    {
+      "src": "/contact.html",
+      "status": 301,
+      "headers": { "Location": "/contact" }
+    },
+    {
+      "src": "/thankyou.html",
+      "status": 301,
+      "headers": { "Location": "/done" }
+    },
+    {
+      "src": "/work.html",
+      "status": 301,
+      "headers": { "Location": "/projects" }
+    },
+    
+    // توجيه المساقات النظيفة إلى الملفات الفعلية
+    {
+      "src": "/home",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/contact",
+      "dest": "/contact.html"
+    },
+    {
+      "src": "/done",
+      "dest": "/thankyou.html"
+    },
+    {
+      "src": "/projects",
+      "dest": "/work.html"
+    },
+    
+    // توجيه الجذر إلى /home
+    {
+      "src": "/",
+      "dest": "/home",
+      "status": 301
+    },
+    
+    // صفحة 404 المخصصة
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html"
+    }
+  ],
+  
+  // إعدادات إضافية لتحسين تجربة 404
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/404.html",
+      "destination": "/404",
+      "statusCode": 301
+    }
+  ]
