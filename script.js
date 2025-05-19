@@ -187,6 +187,32 @@ document.getElementById('exploreBtn').addEventListener('click', function () {
   });
 });
 
+const exploreBtn = document.getElementById('exploreBtn');
+const topBtn = document.getElementById('topBtn');
+
+// تابع يراقب الزر الأصلي
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+            topBtn.style.display = 'block';
+        } else {
+            topBtn.style.display = 'none';
+        }
+    });
+}, {
+    threshold: 0
+});
+
+observer.observe(exploreBtn);
+
+// لما تضغط زر Top يرجعك لفوق
+topBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
 
 // ===== Initialize Everything =====
 window.addEventListener('load', () => {
