@@ -1,67 +1,21 @@
 {
-  "routes": [
-    // التحويلات الدائمة من .html إلى مسارات نظيفة
-    {
-      "src": "/index.html",
-      "status": 301,
-      "headers": { "Location": "/home" }
-    },
-    {
-      "src": "/contact.html",
-      "status": 301,
-      "headers": { "Location": "/contact" }
-    },
-    {
-      "src": "/thankyou.html",
-      "status": 301,
-      "headers": { "Location": "/done" }
-    },
-    {
-      "src": "/work.html",
-      "status": 301,
-      "headers": { "Location": "/projects" }
-    },
-    
-    // توجيه المساقات النظيفة إلى الملفات الفعلية
-    {
-      "src": "/home",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/contact",
-      "dest": "/contact.html"
-    },
-    {
-      "src": "/done",
-      "dest": "/thankyou.html"
-    },
-    {
-      "src": "/projects",
-      "dest": "/work.html"
-    },
-    
-    // توجيه الجذر إلى /home
-    {
-      "src": "/",
-      "dest": "/home",
-      "status": 301
-    },
-    
-    // صفحة 404 المخصصة
-    {
-      "src": "/(.*)",
-      "status": 404,
-      "dest": "/404.html"
-    }
-  ],
-  
-  // إعدادات إضافية لتحسين تجربة 404
+  "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    { "source": "/home", "destination": "/index.html" },
+    { "source": "/contact", "destination": "/contact.html" },
+    { "source": "/done", "destination": "/thankyou.html" },
+    { "source": "/projects", "destination": "/work.html" }
+  ],
   "redirects": [
-    {
-      "source": "/404.html",
-      "destination": "/404",
-      "statusCode": 301
-    }
-  ]
+    { "source": "/index.html", "destination": "/home", "permanent": true },
+    { "source": "/contact.html", "destination": "/contact", "permanent": true },
+    { "source": "/thankyou.html", "destination": "/done", "permanent": true },
+    { "source": "/work.html", "destination": "/projects", "permanent": true },
+    { "source": "/", "destination": "/home", "permanent": false }
+  ],
+  "errorPages": {
+    "404": "/404.html"
+  }
+}
