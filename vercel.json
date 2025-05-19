@@ -13,9 +13,9 @@
     { "source": "/contact.html", "destination": "/contact", "permanent": true },
     { "source": "/thankyou.html", "destination": "/done", "permanent": true },
     { "source": "/work.html", "destination": "/projects", "permanent": true },
-    { "source": "/", "destination": "/home", "permanent": false }
+    { "source": "/", "destination": "/home", "permanent": true }
   ],
   "errorPages": {
-    "404": "/404.html"
+    "notFound": "/404.html"
   }
 }
