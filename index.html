@@ -1,71 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Muhammed Mahmoud | Senior Frontend Developer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <header class="hero-section">
-        <canvas id="particleCanvas"></canvas>
-        <nav class="glass-nav">
-            <div class="nav-brand">MD</div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#expertise">Expertise</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="hero-content">
-            <h1 class="text-gradient">Innovative Digital Experiences</h1>
-            <p class="hero-subtitle">I design and build performant web solutions with cutting-edge technologies</p>
-            <button class="cta-button" id="exploreBtn">Explore My Work ↓</button>
-            <button class="top-button" id="topBtn">To The Top ↑</button>
-
-        </div>
+      <canvas id="particleCanvas"></canvas>
+      <nav class="glass-nav">
+        <div class="nav-brand">MD</div>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#expertise">Expertise</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="hero-content">
+        <h1 class="text-gradient">Innovative Digital Experiences</h1>
+        <p class="hero-subtitle">
+          I design and build performant web solutions with cutting-edge
+          technologies
+        </p>
+        <button class="cta-button" id="exploreBtn">Explore My Work ↓</button>
+        <button class="top-button" id="topBtn">To The Top ↑</button>
+      </div>
     </header>
 
     <main>
-        <section id="about" class="section fade-in">
-            <div class="section-header">
-                <span class="section-tag">01</span>
-                <h2>About Me</h2>
+      <section id="about" class="section fade-in">
+        <div class="section-header">
+          <span class="section-tag">01</span>
+          <h2>About Me</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>
+              Senior Frontend Developer with 1+ years creating award-winning
+              digital products. Specialized in performance optimization and
+              interactive experiences.
+            </p>
+            <div class="signature">Muhammed Mahmoud</div>
+          </div>
+          <div class="about-stats">
+            <div class="stat-card">
+              <div class="stat-number" id="projectsCompleted">0</div>
+              <div class="stat-label">Projects</div>
             </div>
-            <div class="about-grid">
-                <div class="about-text">
-                    <p>Senior Frontend Developer with 1+ years creating award-winning digital products. Specialized in performance optimization and interactive experiences.</p>
-                    <div class="signature">Muhammed Mahmoud</div>
-                </div>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <div class="stat-number" id="projectsCompleted">0</div>
-                        <div class="stat-label">Projects</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number" id="clientsServed">0</div>
-                        <div class="stat-label">Clients</div>
-                    </div>
-                </div>
+            <div class="stat-card">
+              <div class="stat-number" id="clientsServed">0</div>
+              <div class="stat-label">Clients</div>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <section id="expertise" class="section dark-bg fade-in">
-            <div class="section-header">
-                <span class="section-tag">02</span>
-                <h2>Technical Expertise</h2>
-            </div>
-            <div class="skills-container" id="skillsContainer"></div>
-        </section>
+      <section id="expertise" class="section dark-bg fade-in">
+        <div class="section-header">
+          <span class="section-tag">02</span>
+          <h2>Technical Expertise</h2>
+        </div>
+        <div class="skills-container" id="skillsContainer"></div>
+      </section>
     </main>
-</footer>
+
     <!-- مكان نروح له عند الضغط على الزر -->
     <div id="endOfPage"></div>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
