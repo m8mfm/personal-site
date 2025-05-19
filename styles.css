@@ -121,6 +121,16 @@ body {
     color: var(--gray);
 }
 
+#topBtn {
+  display: none;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
+
+
 .cta-button {
     background: linear-gradient(to right, var(--primary), var(--secondary));
     color: white;
