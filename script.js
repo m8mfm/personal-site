@@ -83,14 +83,12 @@ function animateCounter(element, target, duration = 2000) {
 
 // ===== Skills Generator =====
 const skillsData = [
-    { name: "JavaScript (ES6+)", level: 95, icon: "🟨" },
-    { name: "HTML5 & CSS3", level: 98, icon: "🟧" },
+    { name: "Python", level: 70, icon: "🐍" },
+    { name: "HTML5 & CSS3", level: 50, icon: "🟧" },
     { name: "Responsive Design", level: 90, icon: "📱" },
     { name: "UI/UX Principles", level: 85, icon: "🎨" },
     { name: "Performance Optimization", level: 88, icon: "⚡" },
-    { name: "Web Accessibility", level: 82, icon: "♿" },
-    { name: "Cross-Browser Testing", level: 80, icon: "🌐" },
-    { name: "Git Version Control", level: 85, icon: "🔀" }
+    { name: "English-Level", level: 82, icon: "🌐" }
 ];
 
 function generateSkills() {
