@@ -230,57 +230,19 @@ exploreBtn.addEventListener('click', () => {
 });
 
 
-const signatureElement = document.querySelector('.signature');
+document.addEventListener('DOMContentLoaded', () => {
+    const signatureElement = document.querySelector('.signature');
 
-if (signatureElement) {
+    if (signatureElement) {
 
-    signatureElement.style.visibility = 'hidden';
-    signatureElement.style.width = 'auto';
+        const animationDurationSeconds = 3.5; 
+        const animationDurationMs = animationDurationSeconds * 1000;
 
-    const actualWidth = signatureElement.offsetWidth + 'px';
-
-    // إعادة ضبط الخصائص الأصلية للعنصر
-    signatureElement.style.width = '0'; 
-    signatureElement.style.visibility = 'visible';
-
-    signatureElement.style.setProperty('--typing-width', actualWidth);
-
-    const textContent = signatureElement.textContent;
-    const textLength = textContent.length;
-
-    const animationDuration = 3.5 * 1000;
-    const steps = 30;
-    const timePerStep = animationDuration / steps;
-
-    let currentStep = 0;
-    let animationInterval;
-
-    function startCaretBlink() {
-        signatureElement.style.borderRightColor = 'transparent';
         setTimeout(() => {
-            signatureElement.style.borderRightColor = 'var(--primary)';
-        }, 375);
-    }
-
-    animationInterval = setInterval(() => {
-        currentStep++;
-        if (currentStep >= steps) {
-            clearInterval(animationInterval);
-            signatureElement.style.borderRight = 'none'; 
             signatureElement.classList.add('finished');
-        } else {
-            startCaretBlink();
-        }
-    }, timePerStep);
-
-    setTimeout(() => {
-        signatureElement.style.borderRight = 'none';
-        signatureElement.classList.add('finished');
-        clearInterval(animationInterval);
-    }, animationDuration + 500);
-
-    startCaretBlink();
-}
+        }, animationDurationMs + 500); 
+    }
+});
 
 // ===== Initialize Everything =====
 window.addEventListener('load', () => {
