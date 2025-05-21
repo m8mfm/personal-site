@@ -229,19 +229,54 @@ exploreBtn.addEventListener('click', () => {
   }, 600);
 });
 
-const signatureElement = document.querySelector('.signature'); 
 
-if (signatureElement) { 
-    const textContent = signatureElement.textContent; 
-    const textLength = textContent.length;
+const signatureElement = document.querySelector('.signature');
+
+if (signatureElement) {
+    const textContent = signatureElement.textContent;
+    const textLength = textContent.length; 
 
 
-    const animationDuration = 3.5; 
+    const animationDuration = 3.5 * 1000; 
+
+
+    const steps = 30; 
+    const timePerStep = animationDuration / steps;
+
+    let currentStep = 0;
+    let animationInterval;
+
+
+    function startCaretBlink() {
+        signatureElement.style.borderRightColor = 'transparent';
+        setTimeout(() => {
+            signatureElement.style.borderRightColor = 'var(--primary)'; 
+        }, 375);
+    }
+
+    // تشغيل الأنيميشن ومتابعة تقدمها
+    animationInterval = setInterval(() => {
+        currentStep++;
+
+        if (currentStep >= steps) {
+            clearInterval(animationInterval);
+            signatureElement.style.borderRight = 'none'; 
+            signatureElement.classList.add('finished'); 
+        } else {
+
+            startCaretBlink();
+        }
+    }, timePerStep); 
 
 
     setTimeout(() => {
+        signatureElement.style.borderRight = 'none';
         signatureElement.classList.add('finished');
-    }, animationDuration * 1000); 
+        clearInterval(animationInterval); 
+    }, animationDuration + 500); 
+
+
+    startCaretBlink();
 }
 
 // ===== Initialize Everything =====
