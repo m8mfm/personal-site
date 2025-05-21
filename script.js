@@ -229,18 +229,20 @@ exploreBtn.addEventListener('click', () => {
   }, 600);
 });
 
-const signatureElement = document.querySelector('.signature-container');
-        const textContent = signatureElement.textContent; // النص الأصلي
-        const textLength = textContent.length;
+const signatureElement = document.querySelector('.signature'); 
 
-        // نحسب المدة الإجمالية للرسوم المتحركة بالثواني
-        // تأكد أن هذه المدة تتطابق مع مدة أنيميشن "typing" في CSS
-        const animationDuration = 3.5; // بالثواني
+if (signatureElement) { 
+    const textContent = signatureElement.textContent; 
+    const textLength = textContent.length;
 
-        // قم بتعيين وقت لإزالة المؤشر
-        setTimeout(() => {
-            signatureElement.classList.add('finished');
-        }, animationDuration * 1000); // تحويل الثواني إلى ميلي ثانية
+
+    const animationDuration = 3.5; 
+
+
+    setTimeout(() => {
+        signatureElement.classList.add('finished');
+    }, animationDuration * 1000); 
+}
 
 // ===== Initialize Everything =====
 window.addEventListener('load', () => {
