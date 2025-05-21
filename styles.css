@@ -321,22 +321,22 @@ body {
   animation: scaleUp 0.6s ease;
 }
 
-        @keyframes typing {
+@keyframes typing {
             from { width: 0 }
             to { width: 100% } /* أو عرض معين يغطي النص */
         }
 
         /* هذا الكي فريم يجعل مؤشر الكتابة يومض */
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: orange; }
-        }
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+}
 
-        /* لجعل المؤشر يختفي بعد اكتمال الكتابة */
-        .signature-container.finished {
-            border-right: none;
-            animation: typing 3.5s steps(30, end) forwards; /* تشغيل أنيميشن الكتابة فقط */
-        }
+/* لجعل المؤشر يختفي بعد اكتمال الكتابة */
+.signature-container.finished { /* ملاحظة: سنغير هذا الكلاس في الخطوة التالية لـ .signature.finished */
+    border-right: none;
+    animation: typing 3.5s steps(30, end) forwards; /* تشغيل أنيميشن الكتابة فقط */
+}
 
 #scroll-progress {
   position: fixed;
