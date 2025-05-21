@@ -258,10 +258,6 @@ body {
     border-radius: 1rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     text-align: center;
-    animation:
-        typing 3.5s steps(30, end) forwards, /* أنيميشن الكتابة */
-        blink-caret .75s step-end infinite; /* أنيميشن المؤشر */
-    transition: width 0.1s ease-out; /* انتقال سلس لزيادة العرض */
 }
 
 .stat-number {
