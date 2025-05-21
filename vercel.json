@@ -1,9 +1,50 @@
 {
-  "cleanUrls": true,
   "routes": [
-    { "src": "/home", "dest": "/index.html" },
-    { "src": "/contactme", "dest": "/contact.html" },
-    { "src": "/done", "dest": "/thankyou.html" },
-    { "src": "/(.*)", "status": 404, "dest": "/404.html" }
+    {
+      "src": "/home",
+      "dest": "/index.html",
+      "status": 200,
+      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
+    },
+    {
+      "src": "/contactme",
+      "dest": "/contact.html",
+      "status": 200,
+      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
+    },
+    {
+      "src": "/done",
+      "dest": "/thankyou.html",
+      "status": 200,
+      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
+    },
+    {
+      "src": "/styles.css",
+      "dest": "/styles.css",
+      "status": 200,
+      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
+    },
+    {
+      "src": "/script.js",
+      "dest": "/script.js",
+      "status": 200,
+      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico",
+      "status": 200,
+      "headers": { "Cache-Control": "public, max-age=0, must-revalidate" }
+    },
+    {
+      "src": "/(.+)\\.html$",
+      "dest": "/$1",
+      "status": 308
+    },
+    {
+      "src": "/(.*)",
+      "status": 404,
+      "dest": "/404.html"
+    }
   ]
 }
