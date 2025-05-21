@@ -1,0 +1,9 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/home", "destination": "/index.html" },
+    { "source": "/contactme", "destination": "/contact.html" },
+    { "source": "/done", "destination": "/thankyou.html" },
+    { "source": "/error404", "destination": "/404.html" }
+  ]
+}
